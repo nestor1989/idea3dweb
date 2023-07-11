@@ -1,32 +1,33 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import thingsAPI from '../api/thingsApi';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, ActivityIndicator} from 'react-native';
+import { useThings } from '../hooks/useThings';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ThingCard } from '../components/ThingCard';
 
 export const HomeScreen = ()=>{
 
-    useEffect(() => {
-        thingsAPI.get('/search?/page=1')
-        .then(resp => {
-            console.log(resp)
-        })
+    const {thingsPopular, isLoading} = useThings();
+    const {top} = useSafeAreaInsets();
 
-    }, [])
-    
-    const [count, setCount] = useState(0);
+
+    if (isLoading){
+        return(
+            <View style = {{flex:1, justifyContent:'center', alignContent: 'center'}}>
+                <ActivityIndicator color='blue' size={100}/>
+            </View>
+        );
+    }
+
     return (
         <View style={styles.container}>
-        <Text style={styles.title}>You stay at{'\n'}HomeScreen</Text>
-        <TouchableOpacity
-            onPress={() => setCount(count + 1)}
-            style={styles.button}>
-            <Text>Click me!</Text>
-        </TouchableOpacity>
+        <Text style={styles.title}>{thingsPopular[1]?.name}</Text>
+        <ThingCard thing={thingsPopular[1]} />
 
-        <Text>You clicked {count} times!</Text>
         </View>
     );
-
 }
+
+
 
 const styles = StyleSheet.create({
     container: {
