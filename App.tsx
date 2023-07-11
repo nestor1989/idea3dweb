@@ -1,20 +1,18 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { Navigator } from "./src/navigation/navigator";
+import React from 'react';
+import {StyleSheet} from 'react-native';
 
 const App = () => {
-  const [count, setCount] = useState(0);
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Hello from {'\n'}Gonzalez Catan</Text>
-      <TouchableOpacity
-        onPress={() => setCount(count + 1)}
-        style={styles.button}>
-        <Text>Click me!</Text>
-      </TouchableOpacity>
+    <NavigationContainer>
+      <>
+      
+          <Navigator/>
 
-      <Text>You clicked {count} times!</Text>
-    </View>
-  );
+      </>
+      </NavigationContainer>
+  )
 };
 
 const styles = StyleSheet.create({

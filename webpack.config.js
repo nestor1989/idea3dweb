@@ -39,6 +39,7 @@ const svgLoaderConfiguration = {
   ],
 };
 
+
 const imageLoaderConfiguration = {
   test: /\.(gif|jpe?g|png)$/,
   use: {
@@ -81,4 +82,5 @@ module.exports = {
       __DEV__: JSON.stringify(true),
     }),
   ],
+
 };
