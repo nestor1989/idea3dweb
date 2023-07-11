@@ -1,8 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import thingsAPI from '../api/thingsApi';
 
 export const HomeScreen = ()=>{
 
+    useEffect(() => {
+        thingsAPI.get('/search?/page=1')
+        .then(resp => {
+            console.log(resp)
+        })
+
+    }, [])
+    
     const [count, setCount] = useState(0);
     return (
         <View style={styles.container}>
