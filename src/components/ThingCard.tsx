@@ -9,8 +9,11 @@ export const  ThingCard = ({thing}: Props) =>{
     const uri = `${thing.thumbnail}`;
     return (
         <View style={{
-            width:200,
-            height:400,
+            width:250,
+            height:250,
+            paddingHorizontal: 10,
+            paddingTop: 20,
+            paddingBottom: 20,
         }}>
             
             <View style={styles.imageContainer}>
