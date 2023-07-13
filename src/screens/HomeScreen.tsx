@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, Linking, ActivityIndicator, FlatList, Button} from 'react-native';
 import { useThings } from '../hooks/useThings';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ThingCard } from '../components/ThingCard';
 import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview/web";
+import MyButton from '../components/ButtonDownLoad';
+import ButtonDownload from '../components/ButtonDownLoad';
 
 export const HomeScreen = ()=>{
 
@@ -23,9 +25,6 @@ export const HomeScreen = ()=>{
       return <ThingCard thing={data} />;
     };
 
-
-
-
     if (isLoading){
         return(
             <View style = {{flex:1, justifyContent:'center', alignContent: 'center'}}>
@@ -38,13 +37,20 @@ export const HomeScreen = ()=>{
         
       <View style={styles.container}>
 
+        <View style = {styles.callToActionCont}>
+
+          <Text
+          style = {styles.title}
+          >Descarga {"\nla APP"}</Text>
+
+          <ButtonDownload text='La quiero!' url='https://play.google.com/store/apps/details?id=com.idea3d.idea3d'/>
+           
+        </View>
+
+
+
       <View
-      style = {{
-          alignItems:'center',
-          width: '100%', 
-          height: 290
-      }
-      }
+      style = {styles.recycler}
       >
         <RecyclerListView
           style={{ flex: 1 }}
@@ -59,7 +65,7 @@ export const HomeScreen = ()=>{
         
       </View>
 
-      </View>
+    </View>
   );
 }
 
@@ -68,21 +74,28 @@ export const HomeScreen = ()=>{
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#C3E8BD',
-      paddingTop: 40,
-      paddingHorizontal: 10,
+      backgroundColor: '#000000',
+      padding:20,
       width: '100%', 
       height: '100%',
-      justifyContent:'flex-end', 
-      alignContent: 'flex-end'
     },
-    button: {
-      backgroundColor: '#ADBDFF',
-      padding: 5,
-      marginVertical: 20,
-      alignSelf: 'flex-start',
+
+    recycler:{
+      alignItems:'center',
+      width: '100%', 
+      height: 290,
+      justifyContent:'center', 
+      alignContent: 'center'
     },
+  
     title: {
-      fontSize: 40,
+      flex:1,
+      fontSize: 100,
+      color: 'white'
     },
+
+    callToActionCont:{
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    }
   });
