@@ -9,7 +9,7 @@ export const useThings = () =>{
     const[thingsPopular, setThingsPopular ] = useState<Things[]>([])
     
     const getThings = async() =>{
-        const resp = await thingsAPI.get<Data>('/search?/page=1');
+        const resp = await thingsAPI.get<Data>('/search?sort=relevant&posted_after=now-1M');
         const things = resp.data.hits;
         setThingsPopular(things);
         setLoading(false);

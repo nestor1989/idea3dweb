@@ -9,8 +9,11 @@ export const  ThingCard = ({thing}: Props) =>{
     const uri = `${thing.thumbnail}`;
     return (
         <View style={{
-            width:200,
-            height:400,
+            width:250,
+            height:250,
+            paddingHorizontal: 10,
+            paddingTop: 20,
+            paddingBottom: 20,
         }}>
             
             <View style={styles.imageContainer}>
@@ -31,14 +34,14 @@ const styles = StyleSheet.create({
         borderRadius:18,
         backgroundColor:'null',
         flex:1,
-        shadowColor: "#000",
+        shadowColor: "#FFF",
         shadowOffset: {
             width: 0,
-            height: 10,
+            height: 1,
         },
         shadowOpacity: 0.51,
         shadowRadius: 13.16,
-        elevation:5
+        elevation:2
     }
     
 });
