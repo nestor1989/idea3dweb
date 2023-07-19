@@ -12,8 +12,7 @@ export const  ThingCard = ({thing}: Props) =>{
             width:250,
             height:250,
             paddingHorizontal: 10,
-            paddingTop: 20,
-            paddingBottom: 20,
+            paddingVertical:10
         }}>
             
             <View style={styles.imageContainer}>
