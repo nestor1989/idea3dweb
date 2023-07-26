@@ -1,5 +1,6 @@
-import { Image, StyleSheet, View } from "react-native"
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native"
 import { Things } from "../interfaces/thingsInterface"
+import { useNavigation } from "@react-navigation/native";
 
 interface Props{
     thing: Things;
@@ -7,7 +8,11 @@ interface Props{
 
 export const  ThingCard = ({thing}: Props) =>{
     const uri = `${thing.thumbnail}`;
+    const navigation = useNavigation<any>();
     return (
+        <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={ () => navigation.navigate('DetailsScreen', {thing: thing})}>
         <View style={{
             width:250,
             height:250,
@@ -21,6 +26,7 @@ export const  ThingCard = ({thing}: Props) =>{
                 />
             </View>
         </View>
+        </TouchableOpacity>
     )
 }
 
