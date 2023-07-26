@@ -20,10 +20,10 @@ const ButtonDownload = ({ url, text }: MyButtonProps) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#007BFF',
+    backgroundColor: 'teal',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 5,
+    borderRadius:25 ,
     margin: 50,
     width:125,
     height:50,

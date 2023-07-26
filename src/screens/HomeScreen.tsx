@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-import {View, SafeAreaView, Text, StyleSheet, ActivityIndicator, Image, Dimensions} from 'react-native';
+import {View, SafeAreaView, Text, StyleSheet, ActivityIndicator, Image, Dimensions, useWindowDimensions, Button} from 'react-native';
 import { useThings } from '../hooks/useThings';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ThingCard } from '../components/ThingCard';
 import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview/web";
 import ButtonDownload from '../components/ButtonDownLoad';
-import {SvgUri} from 'react-native-svg';
 
 const dimensions = Dimensions.get('window');
 const imageHeight = Math.round(dimensions.width * 1 / 16); //calculate with aspect ratio
@@ -14,7 +13,9 @@ const imageWidth = dimensions.width *0.1;
 export const HomeScreen = ()=>{
 
     const {thingsPopular, isLoading} = useThings();
+
     const {top} = useSafeAreaInsets();
+    const windowsArea = useWindowDimensions;
 
     const dataProvider = new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(thingsPopular);
     const layoutProvider = new LayoutProvider(
@@ -38,12 +39,24 @@ export const HomeScreen = ()=>{
     }
 
     return (
-        
      
-      <SafeAreaView> 
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#000000' }}> 
+        
         <View style= {styles.containerExt}>
+          
+          <View style = {styles.containerTop}>
+            <View style = {{flex:1}}>
+              <Image source={require('../assets/logo_white.png')} style={styles.image} />
+            </View>
+            
+            <View style = {styles.containerRight}>
+              <Text style = {styles.we}>Nosotros</Text>
+              <Text style = {styles.we}>Colaborar</Text>
+              <Text style = {styles.we}>Contacto</Text>
 
-          <Image source={require('../assets/logo_white.png')} style={styles.image} />
+            </View>
+
+          </View>
         
           <View style={styles.container}>
 
@@ -62,13 +75,12 @@ export const HomeScreen = ()=>{
             style = {styles.recycler}
             >
               <RecyclerListView
-                //style={{ flex: 1 }}
+                style={{ flex: 1 }}
                 dataProvider={dataProvider}
                 layoutProvider={layoutProvider}
                 rowRenderer={renderRow}
                 isHorizontal={false}
-                
-                //onEndReachedThreshold={0.4}
+              
               />
 
               
@@ -83,27 +95,27 @@ export const HomeScreen = ()=>{
 
 
 const styles = StyleSheet.create({
-    container: {
-      flex:1,
-      display: 'flex',
-      //backgroundColor: '#000000',
-      flexDirection: 'row',
-      padding:10,
-      width: '100%', 
-      height: '100%',
-      justifyContent:'center', 
-      alignContent: 'center'
-    },
-
+  
     containerExt:{
       flex:1,
       flexDirection: 'column',
-      backgroundColor: '#000000',
-      padding:10,
-      width: '100%', 
-      height: '100%',
-      justifyContent:'center', 
-      alignContent: 'center'
+    },
+  
+    container: {
+      flex:5,
+      flexDirection: 'row',
+    },
+
+    containerTop: {
+      flex:1,
+      //backgroundColor:'teal',
+      flexDirection: 'row',
+    },
+
+    containerRight: {
+      //flex:0.6,
+      flexDirection: 'row',
+      margin:20
     },
 
     recycler:{
@@ -119,6 +131,15 @@ const styles = StyleSheet.create({
       flex:1,
       fontSize: 100,
       color: 'white'
+    },
+
+    we: {
+      flex:1,
+      fontSize: 20,
+      margin:20,
+      color: 'white',
+      alignSelf: 'center',
+      alignContent: 'flex-end'
     },
 
     callToActionCont:{
