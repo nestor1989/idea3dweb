@@ -1,46 +1,24 @@
-import React, {useState} from 'react';
 import {View, SafeAreaView, Text, StyleSheet, ActivityIndicator, Image, Dimensions, useWindowDimensions, Button} from 'react-native';
-import { useThings } from '../hooks/useThings';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ThingCard } from '../components/ThingCard';
-import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview/web";
 import ButtonDownload from '../components/ButtonDownLoad';
-
 const dimensions = Dimensions.get('window');
+const {height, width}=Dimensions.get('window')
 const imageHeight = Math.round(dimensions.width * 1 / 16); //calculate with aspect ratio
 const imageWidth = dimensions.width *0.1;
+const appLaunchHeigth = Math.round(dimensions.width * 3 / 16);
+const appLaunchWidth = dimensions.width *0.3;
+
 
 export const HomeScreen = ()=>{
 
-    const {thingsPopular, isLoading} = useThings();
-
     const {top} = useSafeAreaInsets();
+
     const windowsArea = useWindowDimensions;
 
-    const dataProvider = new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(thingsPopular);
-    const layoutProvider = new LayoutProvider(
-      (index) => 0, // Tipo de diseño para el elemento en el índice dado
-      (type, dim) => {
-        dim.width = 250;
-        dim.height = 250;
-      }
-    );
-    const renderRow = (type: string | number, data: any) => {
-      // Aquí puedes renderizar cada elemento en la lista, similar al renderItem de FlatList
-      return <ThingCard thing={data} />;
-    };
-
-    if (isLoading){
-        return(
-            <View style = {{flex:1, justifyContent:'center', alignContent: 'center'}}>
-                <ActivityIndicator color='blue' size={100}/>
-            </View>
-        );
-    }
 
     return (
      
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#000000' }}> 
+      <SafeAreaView style={styles.safeArea }> 
         
         <View style= {styles.containerExt}>
           
@@ -66,23 +44,15 @@ export const HomeScreen = ()=>{
               style = {styles.title}
               >Descarga {"\nla APP"}</Text>
 
-              <ButtonDownload text='La quiero!' url='https://play.google.com/store/apps/details?id=com.idea3d.idea3d'/>
+              <ButtonDownload url='https://play.google.com/store/apps/details?id=com.idea3d.idea3d'/>
               
             </View>
 
+            <View style = {styles.recyclerManage}>
 
-            <View
-            style = {styles.recycler}
-            >
-              <RecyclerListView
-                style={{ flex: 1 }}
-                dataProvider={dataProvider}
-                layoutProvider={layoutProvider}
-                rowRenderer={renderRow}
-                isHorizontal={false}
-              
-              />
-
+            <View style = {{flex:1}}>
+              <Image source={require('../assets/movil-dual-removebg.png')} style = {styles.imageLaunch} />
+            </View>
               
             </View>
 
@@ -96,9 +66,17 @@ export const HomeScreen = ()=>{
 
 const styles = StyleSheet.create({
   
+    safeArea: {
+      flex: 1, 
+      backgroundColor: '#000000',
+      height: height,
+      width: width
+    },  
+
     containerExt:{
       flex:1,
       flexDirection: 'column',
+    
     },
   
     container: {
@@ -115,16 +93,15 @@ const styles = StyleSheet.create({
     containerRight: {
       //flex:0.6,
       flexDirection: 'row',
-      margin:20
+      marginRight:'8%',
+      marginVertical:20
     },
 
     recycler:{
       flex:1,
       alignItems:'center',
-      width: '50%', 
+      width: '100%', 
       height: '100%',
-      justifyContent:'center', 
-      alignContent: 'center'
     },
   
     title: {
@@ -147,7 +124,13 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       flexWrap: 'wrap',
       justifyContent:'center', 
-      alignContent: 'center'
+      alignContent: 'center',
+      marginBottom: 75
+    },
+
+    recyclerManage:{
+      flex:1,
+      flexDirection: 'row',
     },
 
     image:{
@@ -158,5 +141,11 @@ const styles = StyleSheet.create({
       tintColor:'white',
       top:10,
       left:75,
+    },
+
+    imageLaunch:{
+      height: 450,
+      width:570,
+
     }
   });

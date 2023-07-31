@@ -14,8 +14,8 @@ export const  ThingCard = ({thing}: Props) =>{
             activeOpacity={0.9}
             onPress={ () => navigation.navigate('DetailsScreen', {thing: thing})}>
         <View style={{
-            width:250,
-            height:250,
+            width:220,
+            height:220,
             paddingHorizontal: 10,
             paddingVertical:10
         }}>
