@@ -1,11 +1,13 @@
-import {View, SafeAreaView, Text, StyleSheet, ActivityIndicator, Image, Dimensions, useWindowDimensions, Button} from 'react-native';
+import {View, SafeAreaView, Text, StyleSheet, ActivityIndicator, Image, Dimensions, useWindowDimensions, Button, Modal, TouchableOpacity} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ButtonDownload from '../components/ButtonDownLoad';
+import { useState } from 'react';
+import { container } from 'webpack';
 const dimensions = Dimensions.get('window');
 const {height, width}=Dimensions.get('window')
 const imageHeight = Math.round(dimensions.width * 1 / 16); //calculate with aspect ratio
 const imageWidth = dimensions.width *0.1;
-const appLaunchHeigth = Math.round(dimensions.width * 3 / 16);
+//const appLaunchHeigth = Math.round(dimensions.width * 3 / 16);
 const appLaunchWidth = dimensions.width *0.3;
 
 
@@ -15,10 +17,43 @@ export const HomeScreen = ()=>{
 
     const windowsArea = useWindowDimensions;
 
+    const [isVisible, setIsVisible] = useState(false);
+
+    const [modalText, setModalText] = useState('ksksks');
+
+    const touchInfo = (text: string) =>{
+      setIsVisible(true);
+      setModalText(text);
+    }
+
 
     return (
      
       <SafeAreaView style={styles.safeArea }> 
+
+        <View style = {styles.modalExt}>
+
+        <Modal  animationType="slide" 
+                visible={isVisible}
+                transparent={true}
+                >
+
+            <View style={styles.containerModal}> 
+                
+                <View style = {styles.contModal}>
+                    <Text style = {styles.textModal} >{modalText}</Text>
+                    <TouchableOpacity style ={styles.button}>
+                      <Button 
+                          title= 'cerrar'
+                          onPress={()=> setIsVisible(false)}/>
+                    </TouchableOpacity>
+                </View>
+
+            </View>
+            
+        </Modal>
+
+        </View>
         
         <View style= {styles.containerExt}>
           
@@ -28,7 +63,7 @@ export const HomeScreen = ()=>{
             </View>
             
             <View style = {styles.containerRight}>
-              <Text style = {styles.we}>Nosotros</Text>
+              <Text style = {styles.we} onPress={()=>touchInfo('nosotroo')}>Nosotros</Text>
               <Text style = {styles.we}>Colaborar</Text>
               <Text style = {styles.we}>Contacto</Text>
 
@@ -147,5 +182,37 @@ const styles = StyleSheet.create({
       height: 450,
       width:570,
 
+    },
+
+    containerModal:{
+    flex:1, 
+    backgroundColor:'rgba(0,0,0,0.7)',
+    justifyContent: 'center',
+    alignItems:'center'
+    },
+
+    contModal:{
+      backgroundColor:'white',
+      width:200,
+      height:200,
+      justifyContent: 'center',
+      alignItems:'center',
+      borderRadius:20
+    },
+
+    button: {
+      width:150,
+      height:20
+    },
+
+    textModal:{
+      fontSize: 50,
+      color: 'black'
+    },
+
+    modalExt:{
+      justifyContent: 'center',
+      alignItems:'center'
     }
+
   });
