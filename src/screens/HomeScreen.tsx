@@ -64,8 +64,8 @@ export const HomeScreen = ()=>{
             
             <View style = {styles.containerRight}>
               <Text style = {styles.we} onPress={()=>touchInfo('nosotroo')}>Nosotros</Text>
-              <Text style = {styles.we}>Colaborar</Text>
-              <Text style = {styles.we}>Contacto</Text>
+              <Text style = {styles.we} onPress={()=>touchInfo('colabora gato')}>Colaborar</Text>
+              <Text style = {styles.we} onPress={()=>touchInfo('send me an emaalala')}>Contacto</Text>
 
             </View>
 
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
 
     containerModal:{
     flex:1, 
-    backgroundColor:'rgba(0,0,0,0.7)',
+    backgroundColor:'rgba(0,0,0,0.8)',
     justifyContent: 'center',
     alignItems:'center'
     },
