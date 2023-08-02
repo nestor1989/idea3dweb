@@ -1,4 +1,4 @@
-import {View, SafeAreaView, Text, StyleSheet, ActivityIndicator, Image, Dimensions, useWindowDimensions, Button, Modal, TouchableOpacity} from 'react-native';
+import {View, SafeAreaView, Text, StyleSheet, ActivityIndicator, Image, Dimensions, useWindowDimensions, Button, Modal, TouchableOpacity, Platform} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ButtonDownload from '../components/ButtonDownLoad';
 import { useState } from 'react';
@@ -6,7 +6,7 @@ import { container } from 'webpack';
 const dimensions = Dimensions.get('window');
 const {height, width}=Dimensions.get('window')
 const imageHeight = Math.round(dimensions.width * 1 / 16); //calculate with aspect ratio
-const imageWidth = dimensions.width *0.1;
+const imageWidth = dimensions.width *0.2;
 //const appLaunchHeigth = Math.round(dimensions.width * 3 / 16);
 const appLaunchWidth = dimensions.width *0.3;
 
@@ -25,7 +25,6 @@ export const HomeScreen = ()=>{
       setIsVisible(true);
       setModalText(text);
     }
-
 
     return (
      
@@ -59,7 +58,7 @@ export const HomeScreen = ()=>{
           
           <View style = {styles.containerTop}>
             <View style = {{flex:1}}>
-              <Image source={require('../assets/logo_white.png')} style={styles.image} />
+              <Image source={require('../assets/logo-largo-removebg-preview.png')} style={styles.image} />
             </View>
             
             <View style = {styles.containerRight}>
@@ -123,10 +122,11 @@ const styles = StyleSheet.create({
       flex:1,
       //backgroundColor:'teal',
       flexDirection: 'row',
+      justifyContent: 'space-evenly'
     },
 
     containerRight: {
-      //flex:0.6,
+      flex:1,
       flexDirection: 'row',
       marginRight:'8%',
       marginVertical:20
@@ -142,13 +142,13 @@ const styles = StyleSheet.create({
     title: {
       flex:1,
       fontSize: 100,
-      color: 'white'
+      color: 'white',
     },
 
     we: {
       flex:1,
       fontSize: 20,
-      margin:20,
+      margin:'10%',
       color: 'white',
       alignSelf: 'center',
       alignContent: 'flex-end'
@@ -175,12 +175,12 @@ const styles = StyleSheet.create({
       zIndex: 1,
       tintColor:'white',
       top:10,
-      left:75,
+      left:60,
     },
 
     imageLaunch:{
-      height: 450,
-      width:570,
+      height: '90%',
+      width:'100%',
 
     },
 
@@ -213,6 +213,7 @@ const styles = StyleSheet.create({
     modalExt:{
       justifyContent: 'center',
       alignItems:'center'
+      
     }
 
   });
