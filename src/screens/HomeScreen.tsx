@@ -1,11 +1,13 @@
-import {View, SafeAreaView, Text, StyleSheet, ActivityIndicator, Image, Dimensions, useWindowDimensions, Button} from 'react-native';
+import {View, SafeAreaView, Text, StyleSheet, ActivityIndicator, Image, Dimensions, useWindowDimensions, Button, Modal, TouchableOpacity, Platform} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ButtonDownload from '../components/ButtonDownLoad';
+import { useState } from 'react';
+import { container } from 'webpack';
 const dimensions = Dimensions.get('window');
 const {height, width}=Dimensions.get('window')
 const imageHeight = Math.round(dimensions.width * 1 / 16); //calculate with aspect ratio
-const imageWidth = dimensions.width *0.1;
-const appLaunchHeigth = Math.round(dimensions.width * 3 / 16);
+const imageWidth = dimensions.width *0.2;
+//const appLaunchHeigth = Math.round(dimensions.width * 3 / 16);
 const appLaunchWidth = dimensions.width *0.3;
 
 
@@ -15,22 +17,54 @@ export const HomeScreen = ()=>{
 
     const windowsArea = useWindowDimensions;
 
+    const [isVisible, setIsVisible] = useState(false);
+
+    const [modalText, setModalText] = useState('ksksks');
+
+    const touchInfo = (text: string) =>{
+      setIsVisible(true);
+      setModalText(text);
+    }
 
     return (
      
       <SafeAreaView style={styles.safeArea }> 
+
+        <View style = {styles.modalExt}>
+
+        <Modal  animationType="slide" 
+                visible={isVisible}
+                transparent={true}
+                >
+
+            <View style={styles.containerModal}> 
+                
+                <View style = {styles.contModal}>
+                    <Text style = {styles.textModal} >{modalText}</Text>
+                    <TouchableOpacity style ={styles.button}>
+                      <Button 
+                          title= 'cerrar'
+                          onPress={()=> setIsVisible(false)}/>
+                    </TouchableOpacity>
+                </View>
+
+            </View>
+            
+        </Modal>
+
+        </View>
         
         <View style= {styles.containerExt}>
           
           <View style = {styles.containerTop}>
             <View style = {{flex:1}}>
-              <Image source={require('../assets/logo_white.png')} style={styles.image} />
+              <Image source={require('../assets/logo-largo-removebg-preview.png')} style={styles.image} />
             </View>
             
             <View style = {styles.containerRight}>
-              <Text style = {styles.we}>Nosotros</Text>
-              <Text style = {styles.we}>Colaborar</Text>
-              <Text style = {styles.we}>Contacto</Text>
+              <Text style = {styles.we} onPress={()=>touchInfo('nosotroo')}>Nosotros</Text>
+              <Text style = {styles.we} onPress={()=>touchInfo('colabora gato')}>Colaborar</Text>
+              <Text style = {styles.we} onPress={()=>touchInfo('send me an emaalala')}>Contacto</Text>
 
             </View>
 
@@ -88,10 +122,11 @@ const styles = StyleSheet.create({
       flex:1,
       //backgroundColor:'teal',
       flexDirection: 'row',
+      justifyContent: 'space-evenly'
     },
 
     containerRight: {
-      //flex:0.6,
+      flex:1,
       flexDirection: 'row',
       marginRight:'8%',
       marginVertical:20
@@ -107,13 +142,13 @@ const styles = StyleSheet.create({
     title: {
       flex:1,
       fontSize: 100,
-      color: 'white'
+      color: 'white',
     },
 
     we: {
       flex:1,
       fontSize: 20,
-      margin:20,
+      margin:'10%',
       color: 'white',
       alignSelf: 'center',
       alignContent: 'flex-end'
@@ -140,12 +175,45 @@ const styles = StyleSheet.create({
       zIndex: 1,
       tintColor:'white',
       top:10,
-      left:75,
+      left:60,
     },
 
     imageLaunch:{
-      height: 450,
-      width:570,
+      height: '90%',
+      width:'100%',
 
+    },
+
+    containerModal:{
+    flex:1, 
+    backgroundColor:'rgba(0,0,0,0.8)',
+    justifyContent: 'center',
+    alignItems:'center'
+    },
+
+    contModal:{
+      backgroundColor:'white',
+      width:200,
+      height:200,
+      justifyContent: 'center',
+      alignItems:'center',
+      borderRadius:20
+    },
+
+    button: {
+      width:150,
+      height:20
+    },
+
+    textModal:{
+      fontSize: 50,
+      color: 'black'
+    },
+
+    modalExt:{
+      justifyContent: 'center',
+      alignItems:'center'
+      
     }
+
   });
