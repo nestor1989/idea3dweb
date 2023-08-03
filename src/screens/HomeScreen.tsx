@@ -3,6 +3,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ButtonDownload from '../components/ButtonDownLoad';
 import { useState } from 'react';
 import { container } from 'webpack';
+import ButtonInfo from '../components/ButtonInfo';
+
 const dimensions = Dimensions.get('window');
 const {height, width}=Dimensions.get('window')
 const imageHeight = Math.round(dimensions.width * 1 / 16); //calculate with aspect ratio
@@ -57,14 +59,15 @@ export const HomeScreen = ()=>{
         <View style= {styles.containerExt}>
           
           <View style = {styles.containerTop}>
-            <View style = {{flex:1}}>
+            
+            <View style = {styles.containerLeft}>
               <Image source={require('../assets/logo-largo-removebg-preview.png')} style={styles.image} />
             </View>
             
             <View style = {styles.containerRight}>
-              <Text style = {styles.we} onPress={()=>touchInfo('nosotroo')}>Nosotros</Text>
-              <Text style = {styles.we} onPress={()=>touchInfo('colabora gato')}>Colaborar</Text>
-              <Text style = {styles.we} onPress={()=>touchInfo('send me an emaalala')}>Contacto</Text>
+              <ButtonInfo onPress={()=>touchInfo('nosotroo')} icon={require('../assets/cubo.png')}/>
+              <ButtonInfo onPress={()=>touchInfo('colabora gato')} icon={require('../assets/corazon.png')}/>
+              <ButtonInfo onPress={()=>touchInfo('send me an emaalala')} icon={require('../assets/avion-de-papel.png')}/>
 
             </View>
 
@@ -76,7 +79,7 @@ export const HomeScreen = ()=>{
 
               <Text
               style = {styles.title}
-              >Descarga {"\nla APP"}</Text>
+              >Imprime tus{"\nSUEÑOS"}</Text>
 
               <ButtonDownload url='https://play.google.com/store/apps/details?id=com.idea3d.idea3d'/>
               
@@ -110,7 +113,6 @@ const styles = StyleSheet.create({
     containerExt:{
       flex:1,
       flexDirection: 'column',
-    
     },
   
     container: {
@@ -120,16 +122,23 @@ const styles = StyleSheet.create({
 
     containerTop: {
       flex:1,
-      //backgroundColor:'teal',
+      backgroundColor:'blue',
       flexDirection: 'row',
-      justifyContent: 'space-evenly'
     },
 
     containerRight: {
       flex:1,
+      backgroundColor:'teal',
       flexDirection: 'row',
-      marginRight:'8%',
-      marginVertical:20
+      alignItems:'flex-end',
+      justifyContent:'center', 
+    },
+
+    containerLeft:{
+      flex:1,
+      backgroundColor:'yellow',
+      alignItems:'flex-start',
+      justifyContent:'center',
     },
 
     recycler:{
@@ -145,43 +154,31 @@ const styles = StyleSheet.create({
       color: 'white',
     },
 
-    we: {
-      flex:1,
-      fontSize: 20,
-      margin:'10%',
-      color: 'white',
-      alignSelf: 'center',
-      alignContent: 'flex-end'
-    },
-
     callToActionCont:{
       flex:1,
       flexDirection: 'column',
       flexWrap: 'wrap',
       justifyContent:'center', 
-      alignContent: 'center',
-      marginBottom: 75
+      alignItems: 'center',
+      backgroundColor:'green',
     },
 
     recyclerManage:{
       flex:1,
       flexDirection: 'row',
+      backgroundColor:'red',
     },
 
     image:{
-      height: imageHeight,
-      width: imageWidth,
+      height: '100%',
+      width: '75%',
       fill: 'white',
-      zIndex: 1,
       tintColor:'white',
-      top:10,
-      left:60,
     },
 
     imageLaunch:{
       height: '90%',
       width:'100%',
-
     },
 
     containerModal:{
