@@ -12,6 +12,7 @@ const imageWidth = dimensions.width *0.2;
 //const appLaunchHeigth = Math.round(dimensions.width * 3 / 16);
 const appLaunchWidth = dimensions.width *0.3;
 
+const isSmallDevice = dimensions.width < 768
 
 export const HomeScreen = ()=>{
 
@@ -29,8 +30,8 @@ export const HomeScreen = ()=>{
     }
 
     return (
-     
-      <SafeAreaView style={styles.safeArea }> 
+        
+        <SafeAreaView style={styles.safeArea }> 
 
         <View style = {styles.modalExt}>
 
@@ -61,7 +62,7 @@ export const HomeScreen = ()=>{
           <View style = {styles.containerTop}>
             
             <View style = {styles.containerLeft}>
-              <Image source={require('../assets/logo-largo-removebg-preview.png')} style={styles.image} />
+              <Image source={require('../assets/logo-largo-removebg-preview.png')} style={[styles.image, isSmallDevice && styles.imageMobile]} />
             </View>
             
             <View style = {styles.containerRight}>
@@ -73,13 +74,13 @@ export const HomeScreen = ()=>{
 
           </View>
         
-          <View style={styles.container}>
+          <View style={[styles.container, isSmallDevice && styles.containerMobile]}>
 
-            <View style = {styles.callToActionCont}>
+            <View style = {[styles.callToActionCont, isSmallDevice && styles.callToActionContMobile ]}>
 
               <Text
-              style = {styles.title}
-              >Imprime tus{"\nSUEÑOS"}</Text>
+              style = {[styles.title, isSmallDevice && styles.titleMobile]}
+              >Soluciones{"\npara Makers"}</Text>
 
               <ButtonDownload url='https://play.google.com/store/apps/details?id=com.idea3d.idea3d'/>
               
@@ -98,7 +99,6 @@ export const HomeScreen = ()=>{
     </SafeAreaView> 
   );
 }
-
 
 
 const styles = StyleSheet.create({
@@ -120,15 +120,28 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
     },
 
+    containerMobile: {
+      flex:5,
+      flexDirection: 'column-reverse',
+    },
+
     containerTop: {
       flex:1,
-      backgroundColor:'blue',
+      //backgroundColor:'blue',
       flexDirection: 'row',
     },
 
     containerRight: {
       flex:1,
-      backgroundColor:'teal',
+      //backgroundColor:'teal',
+      flexDirection: 'row',
+      alignItems:'flex-end',
+      justifyContent:'center', 
+    },
+
+    containeRightMobile:{
+      flex:1,
+      //backgroundColor:'green',
       flexDirection: 'row',
       alignItems:'flex-end',
       justifyContent:'center', 
@@ -136,7 +149,7 @@ const styles = StyleSheet.create({
 
     containerLeft:{
       flex:1,
-      backgroundColor:'yellow',
+      //backgroundColor:'yellow',
       alignItems:'flex-start',
       justifyContent:'center',
     },
@@ -154,24 +167,47 @@ const styles = StyleSheet.create({
       color: 'white',
     },
 
+    titleMobile: {
+      flex:1,
+      fontSize: 50,
+      color: 'white',
+    },
+
     callToActionCont:{
       flex:1,
       flexDirection: 'column',
-      flexWrap: 'wrap',
-      justifyContent:'center', 
+      //flexWrap: 'wrap',
+      
+      justifyContent:'space-evenly', 
       alignItems: 'center',
-      backgroundColor:'green',
+      //backgroundColor:'green',
+    },
+
+    callToActionContMobile:{
+      flex:0.7,
+      flexDirection: 'column',
+      justifyContent:'center', 
+      
+      //backgroundColor:'green',
     },
 
     recyclerManage:{
       flex:1,
       flexDirection: 'row',
-      backgroundColor:'red',
+      //backgroundColor:'red',
     },
 
     image:{
-      height: '100%',
-      width: '75%',
+      height: '80%',
+      width: '70%',
+      fill: 'white',
+      tintColor:'white',
+      justifyContent:'center'
+    },
+
+    imageMobile:{
+      height: '75%',
+      width: '100%',
       fill: 'white',
       tintColor:'white',
     },
