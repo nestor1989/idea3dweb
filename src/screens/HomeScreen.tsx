@@ -4,6 +4,7 @@ import ButtonDownload from '../components/ButtonDownLoad';
 import { useState } from 'react';
 import { container } from 'webpack';
 import ButtonInfo from '../components/ButtonInfo';
+import LinearGradient from 'react-native-web-linear-gradient';
 
 const dimensions = Dimensions.get('window');
 const {height, width}=Dimensions.get('window')
@@ -31,8 +32,9 @@ export const HomeScreen = ()=>{
 
     return (
         
-        <SafeAreaView style={styles.safeArea }> 
+      <SafeAreaView style={styles.safeArea }> 
 
+        <LinearGradient colors={['#040404', '#001933']} angle={90} style={styles.linearGradient}>
         <View style = {styles.modalExt}>
 
         <Modal  animationType="slide" 
@@ -96,7 +98,9 @@ export const HomeScreen = ()=>{
 
         </View>
       </View>
+      </LinearGradient>
     </SafeAreaView> 
+    
   );
 }
 
@@ -108,7 +112,11 @@ const styles = StyleSheet.create({
       backgroundColor: '#000000',
       height: height,
       width: width
-    },  
+    },
+    
+    linearGradient: {
+      flex: 1,
+    },
 
     containerExt:{
       flex:1,
