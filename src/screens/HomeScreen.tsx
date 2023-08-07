@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { container } from 'webpack';
 import ButtonInfo from '../components/ButtonInfo';
 import LinearGradient from 'react-native-web-linear-gradient';
+import ButtonDownloadUX from '../components/ButtonDownLoadUX';
 
 const dimensions = Dimensions.get('window');
 const {height, width}=Dimensions.get('window')
@@ -80,17 +81,25 @@ export const HomeScreen = ()=>{
 
             <View style = {[styles.callToActionCont, isSmallDevice && styles.callToActionContMobile ]}>
 
+              <View style={styles.textCont}>
               <Text
               style = {[styles.title, isSmallDevice && styles.titleMobile]}
               >Soluciones{"\npara Makers"}</Text>
 
-              <ButtonDownload url='https://play.google.com/store/apps/details?id=com.idea3d.idea3d'/>
-              
+              <Text style = {[styles.subtitle, isSmallDevice && styles.subtitleMobile]}
+              >Somos la app #1 en impresión 3D
+              </Text>
+
+              </View>
+
+              <View style={styles.contDownload}>
+              <ButtonDownloadUX url='https://play.google.com/store/apps/details?id=com.idea3d.idea3d'/>
+              </View>
             </View>
 
             <View style = {styles.recyclerManage}>
 
-            <View style = {{flex:1}}>
+            <View style = {[styles.contImageLaunch, isSmallDevice && styles.contImageLaunchMob]}>
               <Image source={require('../assets/movil-dual-removebg.png')} style = {styles.imageLaunch} />
             </View>
               
@@ -144,7 +153,7 @@ const styles = StyleSheet.create({
       //backgroundColor:'teal',
       flexDirection: 'row',
       alignItems:'flex-end',
-      justifyContent:'center', 
+      justifyContent:'flex-end', 
     },
 
     containeRightMobile:{
@@ -171,32 +180,61 @@ const styles = StyleSheet.create({
   
     title: {
       flex:1,
-      fontSize: 100,
+      fontSize: 80,
       color: 'white',
+      textAlign: 'justify',
+      left: '10%', 
     },
 
     titleMobile: {
       flex:1,
-      fontSize: 50,
+      fontSize: 40,
       color: 'white',
+      textAlign: 'justify',
+      left: '12%',
+      justifyContent:'center'
+    },
+
+    subtitle: {
+      flex:1,
+      fontSize: 40,
+      color: 'white',
+      textAlign: 'justify',
+      top:20,
+      left: '10%', 
+    },
+
+    subtitleMobile: {
+      flex:1,
+      fontSize: 20,
+      color: 'white',
+      textAlign: 'justify',
+      left: '12%', 
+      justifyContent:'center',
+      top:10
     },
 
     callToActionCont:{
       flex:1,
       flexDirection: 'column',
-      //flexWrap: 'wrap',
-      
       justifyContent:'space-evenly', 
       alignItems: 'center',
-      //backgroundColor:'green',
+      //backgroundColor:'red',
     },
 
     callToActionContMobile:{
-      flex:0.7,
+      flex:1,
       flexDirection: 'column',
-      justifyContent:'center', 
-      
+      justifyContent:'center',
+      alignItems:'flex-start'
       //backgroundColor:'green',
+    },
+
+    textCont:{
+      flex:1,
+      alignContent:'center',
+      //backgroundColor:'green',
+      justifyContent:'center'
     },
 
     recyclerManage:{
@@ -206,8 +244,9 @@ const styles = StyleSheet.create({
     },
 
     image:{
-      height: '80%',
-      width: '70%',
+      height: '40%',
+      width: '35%',
+      left: '7%',
       fill: 'white',
       tintColor:'white',
       justifyContent:'center'
@@ -218,8 +257,28 @@ const styles = StyleSheet.create({
       width: '100%',
       fill: 'white',
       tintColor:'white',
+      left: '0%',
     },
 
+    contDownload:{
+      flex:1, 
+      width: '100%',
+      justifyContent:'center', 
+      alignItems: 'center', 
+      //backgroundColor:'blue'
+    },
+
+    
+    contImageLaunch:{
+      flex:1
+    },
+
+    contImageLaunchMob:{
+      flex:1,
+      alignContent:'center',
+      //backgroundColor:'blue'
+    },
+    
     imageLaunch:{
       height: '90%',
       width:'100%',
