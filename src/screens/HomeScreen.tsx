@@ -4,6 +4,8 @@ import ButtonDownload from '../components/ButtonDownLoad';
 import { useState } from 'react';
 import { container } from 'webpack';
 import ButtonInfo from '../components/ButtonInfo';
+import LinearGradient from 'react-native-web-linear-gradient';
+import ButtonDownloadUX from '../components/ButtonDownLoadUX';
 
 const dimensions = Dimensions.get('window');
 const {height, width}=Dimensions.get('window')
@@ -12,6 +14,7 @@ const imageWidth = dimensions.width *0.2;
 //const appLaunchHeigth = Math.round(dimensions.width * 3 / 16);
 const appLaunchWidth = dimensions.width *0.3;
 
+const isSmallDevice = dimensions.width < 768
 
 export const HomeScreen = ()=>{
 
@@ -29,9 +32,10 @@ export const HomeScreen = ()=>{
     }
 
     return (
-     
+        
       <SafeAreaView style={styles.safeArea }> 
 
+        <LinearGradient colors={['#040404', '#001933']} angle={90} style={styles.linearGradient}>
         <View style = {styles.modalExt}>
 
         <Modal  animationType="slide" 
@@ -61,7 +65,7 @@ export const HomeScreen = ()=>{
           <View style = {styles.containerTop}>
             
             <View style = {styles.containerLeft}>
-              <Image source={require('../assets/logo-largo-removebg-preview.png')} style={styles.image} />
+              <Image source={require('../assets/logo-largo-removebg-preview.png')} style={[styles.image, isSmallDevice && styles.imageMobile]} />
             </View>
             
             <View style = {styles.containerRight}>
@@ -73,21 +77,29 @@ export const HomeScreen = ()=>{
 
           </View>
         
-          <View style={styles.container}>
+          <View style={[styles.container, isSmallDevice && styles.containerMobile]}>
 
-            <View style = {styles.callToActionCont}>
+            <View style = {[styles.callToActionCont, isSmallDevice && styles.callToActionContMobile ]}>
 
+              <View style={styles.textCont}>
               <Text
-              style = {styles.title}
-              >Imprime tus{"\nSUEÑOS"}</Text>
+              style = {[styles.title, isSmallDevice && styles.titleMobile]}
+              >Soluciones{"\npara Makers"}</Text>
 
-              <ButtonDownload url='https://play.google.com/store/apps/details?id=com.idea3d.idea3d'/>
-              
+              <Text style = {[styles.subtitle, isSmallDevice && styles.subtitleMobile]}
+              >Somos la app #1 en impresión 3D
+              </Text>
+
+              </View>
+
+              <View style={styles.contDownload}>
+              <ButtonDownloadUX url='https://play.google.com/store/apps/details?id=com.idea3d.idea3d'/>
+              </View>
             </View>
 
             <View style = {styles.recyclerManage}>
 
-            <View style = {{flex:1}}>
+            <View style = {[styles.contImageLaunch, isSmallDevice && styles.contImageLaunchMob]}>
               <Image source={require('../assets/movil-dual-removebg.png')} style = {styles.imageLaunch} />
             </View>
               
@@ -95,10 +107,11 @@ export const HomeScreen = ()=>{
 
         </View>
       </View>
+      </LinearGradient>
     </SafeAreaView> 
+    
   );
 }
-
 
 
 const styles = StyleSheet.create({
@@ -108,7 +121,11 @@ const styles = StyleSheet.create({
       backgroundColor: '#000000',
       height: height,
       width: width
-    },  
+    },
+    
+    linearGradient: {
+      flex: 1,
+    },
 
     containerExt:{
       flex:1,
@@ -120,15 +137,28 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
     },
 
+    containerMobile: {
+      flex:5,
+      flexDirection: 'column-reverse',
+    },
+
     containerTop: {
       flex:1,
-      backgroundColor:'blue',
+      //backgroundColor:'blue',
       flexDirection: 'row',
     },
 
     containerRight: {
       flex:1,
-      backgroundColor:'teal',
+      //backgroundColor:'teal',
+      flexDirection: 'row',
+      alignItems:'flex-end',
+      justifyContent:'flex-end', 
+    },
+
+    containeRightMobile:{
+      flex:1,
+      //backgroundColor:'green',
       flexDirection: 'row',
       alignItems:'flex-end',
       justifyContent:'center', 
@@ -136,7 +166,7 @@ const styles = StyleSheet.create({
 
     containerLeft:{
       flex:1,
-      backgroundColor:'yellow',
+      //backgroundColor:'yellow',
       alignItems:'flex-start',
       justifyContent:'center',
     },
@@ -150,32 +180,105 @@ const styles = StyleSheet.create({
   
     title: {
       flex:1,
-      fontSize: 100,
+      fontSize: 80,
       color: 'white',
+      textAlign: 'justify',
+      left: '10%', 
+    },
+
+    titleMobile: {
+      flex:1,
+      fontSize: 40,
+      color: 'white',
+      textAlign: 'justify',
+      left: '12%',
+      justifyContent:'center'
+    },
+
+    subtitle: {
+      flex:1,
+      fontSize: 40,
+      color: 'white',
+      textAlign: 'justify',
+      top:20,
+      left: '10%', 
+    },
+
+    subtitleMobile: {
+      flex:1,
+      fontSize: 20,
+      color: 'white',
+      textAlign: 'justify',
+      left: '12%', 
+      justifyContent:'center',
+      top:10
     },
 
     callToActionCont:{
       flex:1,
       flexDirection: 'column',
-      flexWrap: 'wrap',
-      justifyContent:'center', 
+      justifyContent:'space-evenly', 
       alignItems: 'center',
-      backgroundColor:'green',
+      //backgroundColor:'red',
+    },
+
+    callToActionContMobile:{
+      flex:1,
+      flexDirection: 'column',
+      justifyContent:'center',
+      alignItems:'flex-start'
+      //backgroundColor:'green',
+    },
+
+    textCont:{
+      flex:1,
+      alignContent:'center',
+      //backgroundColor:'green',
+      justifyContent:'center'
     },
 
     recyclerManage:{
       flex:1,
       flexDirection: 'row',
-      backgroundColor:'red',
+      //backgroundColor:'red',
     },
 
     image:{
-      height: '100%',
-      width: '75%',
+      height: '40%',
+      width: '35%',
+      left: '7%',
       fill: 'white',
       tintColor:'white',
+      justifyContent:'center'
     },
 
+    imageMobile:{
+      height: '75%',
+      width: '100%',
+      fill: 'white',
+      tintColor:'white',
+      left: '0%',
+    },
+
+    contDownload:{
+      flex:1, 
+      width: '100%',
+      justifyContent:'center', 
+      alignItems: 'center', 
+      //backgroundColor:'blue'
+    },
+
+    
+    contImageLaunch:{
+      flex:1
+    },
+
+    contImageLaunchMob:{
+      flex:1,
+      alignContent:'center',
+      //backgroundColor:'blue'
+    },
+    
     imageLaunch:{
       height: '90%',
       width:'100%',
