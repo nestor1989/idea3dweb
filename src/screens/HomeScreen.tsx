@@ -81,13 +81,13 @@ export const HomeScreen = ()=>{
 
             <View style = {[styles.callToActionCont, isSmallDevice && styles.callToActionContMobile ]}>
 
-              <View style={styles.textCont}>
+              <View style={[styles.textCont, isSmallDevice && styles.textContMobile]}>
               <Text
               style = {[styles.title, isSmallDevice && styles.titleMobile]}
               >Soluciones{"\npara Makers"}</Text>
 
               <Text style = {[styles.subtitle, isSmallDevice && styles.subtitleMobile]}
-              >Somos la app #1 en impresión 3D
+              >Impresión 3D en la palma de tu mano
               </Text>
 
               </View>
@@ -183,7 +183,8 @@ const styles = StyleSheet.create({
       fontSize: 80,
       color: 'white',
       textAlign: 'justify',
-      left: '10%', 
+      left: '10%',
+      justifyContent:'flex-start' 
     },
 
     titleMobile: {
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
 
     subtitle: {
       flex:1,
-      fontSize: 40,
+      fontSize: 20,
       color: 'white',
       textAlign: 'justify',
       top:20,
@@ -218,7 +219,8 @@ const styles = StyleSheet.create({
       flex:1,
       flexDirection: 'column',
       justifyContent:'space-evenly', 
-      alignItems: 'center',
+      alignItems: 'flex-start',
+      
       //backgroundColor:'red',
     },
 
@@ -232,9 +234,19 @@ const styles = StyleSheet.create({
 
     textCont:{
       flex:1,
+      alignContent:'flex-start',
+      //backgroundColor:'green',
+      justifyContent:'flex-start',
+      alignItems:'flex-start',
+      left:'5%'
+    },
+
+    textContMobile:{
+      flex:1,
       alignContent:'center',
       //backgroundColor:'green',
-      justifyContent:'center'
+      justifyContent:'center',
+      left:'0%'
     },
 
     recyclerManage:{
