@@ -116,6 +116,11 @@ export const HomeScreen = ()=>{
 
 const styles = StyleSheet.create({
   
+    customFont:{
+      fontFamily: 'at_surt_bold'
+
+    },
+  
     safeArea: {
       flex: 1, 
       backgroundColor: '#000000',
@@ -184,7 +189,8 @@ const styles = StyleSheet.create({
       color: 'white',
       textAlign: 'justify',
       left: '10%',
-      justifyContent:'flex-start' 
+      justifyContent:'flex-start',
+      fontFamily: 'Roboto-Light.ttf' 
     },
 
     titleMobile: {
@@ -193,7 +199,8 @@ const styles = StyleSheet.create({
       color: 'white',
       textAlign: 'justify',
       left: '12%',
-      justifyContent:'center'
+      justifyContent:'center',
+      fontFamily: 'at_surt_bold.otf'
     },
 
     subtitle: {
@@ -202,7 +209,8 @@ const styles = StyleSheet.create({
       color: 'white',
       textAlign: 'justify',
       top:20,
-      left: '10%', 
+      left: '10%',
+      fontFamily: 'at_surt_light.otf' 
     },
 
     subtitleMobile: {
@@ -212,7 +220,8 @@ const styles = StyleSheet.create({
       textAlign: 'justify',
       left: '12%', 
       justifyContent:'center',
-      top:10
+      top:10,
+      fontFamily: 'at_surt_light.otf'
     },
 
     callToActionCont:{
