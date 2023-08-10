@@ -316,21 +316,6 @@ const styles = StyleSheet.create({
     alignItems:'center'
     },
 
-    contModal:{
-      backgroundColor:'rgba(255,255,255,0.7)',
-      width:'40%',
-      height:'70%',
-      padding:10,
-      justifyContent: 'center',
-      alignItems:'center',
-      borderRadius:20
-    },
-
-    contModalMobile:{
-      width:'70%',
-      height:'50%',
-    },
-
     button: {
       width:150,
       height:20
