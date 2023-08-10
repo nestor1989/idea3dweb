@@ -6,6 +6,7 @@ import ButtonInfo from '../components/ButtonInfo';
 import LinearGradient from 'react-native-web-linear-gradient';
 import ButtonDownloadUX from '../components/ButtonDownLoadUX';
 import { ModalContent } from '../components/ModalContent';
+import * as myConstClass from '../constants';
 
 const dimensions = Dimensions.get('window');
 const {height, width}=Dimensions.get('window')
@@ -28,17 +29,6 @@ export const HomeScreen = ()=>{
       setModalText(text);
       setIsVisible(true);
     }
-
-    
-    const modalTitle1= 'Quienes somos';
-    const modalInfo1 = 'somos nosotros';
-  
-    const modalTitle2 = 'Colabora con Idea 3D';
-    const modalInfo2 = 'un pesito pa la birra';  
-  
-    const modalTitle3= 'Contactanos';
-    const modalInfo3 = 'mandame un poema ksqjswkljsklqjsqs \nsksjksjsjsjsssjsksqnslnqlsmssjsjsjsjsjsjsj\nsssssssssssssssssssssssssssssssssssssssssssssssssssssssssss';
-      
   
     return (
         
@@ -73,9 +63,9 @@ export const HomeScreen = ()=>{
             </View>
             
             <View style = {styles.containerRight}>
-              <ButtonInfo onPress={()=>touchInfo(modalTitle1, modalInfo1)} icon={require('../assets/cubo.png')}/>
-              <ButtonInfo onPress={()=>touchInfo(modalTitle2, modalInfo2)} icon={require('../assets/corazon.png')}/>
-              <ButtonInfo onPress={()=>touchInfo(modalTitle3, modalInfo3)} icon={require('../assets/avion-de-papel.png')}/>
+              <ButtonInfo onPress={()=>touchInfo(myConstClass.modalTitle1, myConstClass.modalInfo1)} icon={require('../assets/cubo.png')}/>
+              <ButtonInfo onPress={()=>touchInfo(myConstClass.modalTitle2, myConstClass.modalInfo2)} icon={require('../assets/corazon.png')}/>
+              <ButtonInfo onPress={()=>touchInfo(myConstClass.modalTitle3, myConstClass.modalInfo3)} icon={require('../assets/avion-de-papel.png')}/>
 
             </View>
 
