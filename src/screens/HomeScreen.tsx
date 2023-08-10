@@ -1,18 +1,14 @@
 import {View, SafeAreaView, Text, StyleSheet, ActivityIndicator, Image, Dimensions, useWindowDimensions, Button, Modal, TouchableOpacity, Platform} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ButtonDownload from '../components/ButtonDownLoad';
+
 import { useState } from 'react';
-import { container } from 'webpack';
 import ButtonInfo from '../components/ButtonInfo';
 import LinearGradient from 'react-native-web-linear-gradient';
 import ButtonDownloadUX from '../components/ButtonDownLoadUX';
+import { ModalContent } from '../components/ModalContent';
 
 const dimensions = Dimensions.get('window');
 const {height, width}=Dimensions.get('window')
-const imageHeight = Math.round(dimensions.width * 1 / 16); //calculate with aspect ratio
-const imageWidth = dimensions.width *0.2;
-//const appLaunchHeigth = Math.round(dimensions.width * 3 / 16);
-const appLaunchWidth = dimensions.width *0.3;
 
 const isSmallDevice = dimensions.width < 768
 
@@ -24,13 +20,26 @@ export const HomeScreen = ()=>{
 
     const [isVisible, setIsVisible] = useState(false);
 
-    const [modalText, setModalText] = useState('ksksks');
+    const [modalTitle, setModalTitle] = useState('') 
+    const [modalText, setModalText] = useState('');
 
-    const touchInfo = (text: string) =>{
-      setIsVisible(true);
+    const touchInfo = (title: string, text: string) =>{
+      setModalTitle(title);
       setModalText(text);
+      setIsVisible(true);
     }
 
+    
+    const modalTitle1= 'Quienes somos';
+    const modalInfo1 = 'somos nosotros';
+  
+    const modalTitle2 = 'Colabora con Idea 3D';
+    const modalInfo2 = 'un pesito pa la birra';  
+  
+    const modalTitle3= 'Contactanos';
+    const modalInfo3 = 'mandame un poema ksqjswkljsklqjsqs \nsksjksjsjsjsssjsksqnslnqlsmssjsjsjsjsjsjsj\nsssssssssssssssssssssssssssssssssssssssssssssssssssssssssss';
+      
+  
     return (
         
       <SafeAreaView style={styles.safeArea }> 
@@ -44,16 +53,11 @@ export const HomeScreen = ()=>{
                 >
 
             <View style={styles.containerModal}> 
-                
-                <View style = {styles.contModal}>
-                    <Text style = {styles.textModal} >{modalText}</Text>
-                    <TouchableOpacity style ={styles.button}>
-                      <Button 
-                          title= 'cerrar'
-                          onPress={()=> setIsVisible(false)}/>
-                    </TouchableOpacity>
-                </View>
 
+            <ModalContent onPress={()=> setIsVisible(false)}
+                          title = {modalTitle}
+                          info  = {modalText}/>
+  
             </View>
             
         </Modal>
@@ -69,9 +73,9 @@ export const HomeScreen = ()=>{
             </View>
             
             <View style = {styles.containerRight}>
-              <ButtonInfo onPress={()=>touchInfo('nosotroo')} icon={require('../assets/cubo.png')}/>
-              <ButtonInfo onPress={()=>touchInfo('colabora gato')} icon={require('../assets/corazon.png')}/>
-              <ButtonInfo onPress={()=>touchInfo('send me an emaalala')} icon={require('../assets/avion-de-papel.png')}/>
+              <ButtonInfo onPress={()=>touchInfo(modalTitle1, modalInfo1)} icon={require('../assets/cubo.png')}/>
+              <ButtonInfo onPress={()=>touchInfo(modalTitle2, modalInfo2)} icon={require('../assets/corazon.png')}/>
+              <ButtonInfo onPress={()=>touchInfo(modalTitle3, modalInfo3)} icon={require('../assets/avion-de-papel.png')}/>
 
             </View>
 
@@ -81,13 +85,13 @@ export const HomeScreen = ()=>{
 
             <View style = {[styles.callToActionCont, isSmallDevice && styles.callToActionContMobile ]}>
 
-              <View style={styles.textCont}>
+              <View style={[styles.textCont, isSmallDevice && styles.textContMobile]}>
               <Text
               style = {[styles.title, isSmallDevice && styles.titleMobile]}
               >Soluciones{"\npara Makers"}</Text>
 
               <Text style = {[styles.subtitle, isSmallDevice && styles.subtitleMobile]}
-              >Somos la app #1 en impresión 3D
+              >Impresión 3D en la palma de tu mano
               </Text>
 
               </View>
@@ -115,6 +119,11 @@ export const HomeScreen = ()=>{
 
 
 const styles = StyleSheet.create({
+  
+    customFont:{
+      fontFamily: 'at_surt_bold'
+
+    },
   
     safeArea: {
       flex: 1, 
@@ -183,7 +192,9 @@ const styles = StyleSheet.create({
       fontSize: 80,
       color: 'white',
       textAlign: 'justify',
-      left: '10%', 
+      left: '10%',
+      justifyContent:'flex-start',
+      fontFamily: 'Roboto-Light.ttf' 
     },
 
     titleMobile: {
@@ -192,16 +203,18 @@ const styles = StyleSheet.create({
       color: 'white',
       textAlign: 'justify',
       left: '12%',
-      justifyContent:'center'
+      justifyContent:'center',
+      fontFamily: 'at_surt_bold.otf'
     },
 
     subtitle: {
       flex:1,
-      fontSize: 40,
+      fontSize: 20,
       color: 'white',
       textAlign: 'justify',
       top:20,
-      left: '10%', 
+      left: '10%',
+      fontFamily: 'at_surt_light.otf' 
     },
 
     subtitleMobile: {
@@ -211,14 +224,16 @@ const styles = StyleSheet.create({
       textAlign: 'justify',
       left: '12%', 
       justifyContent:'center',
-      top:10
+      top:10,
+      fontFamily: 'at_surt_light.otf'
     },
 
     callToActionCont:{
       flex:1,
       flexDirection: 'column',
       justifyContent:'space-evenly', 
-      alignItems: 'center',
+      alignItems: 'flex-start',
+      
       //backgroundColor:'red',
     },
 
@@ -232,9 +247,19 @@ const styles = StyleSheet.create({
 
     textCont:{
       flex:1,
+      alignContent:'flex-start',
+      //backgroundColor:'green',
+      justifyContent:'flex-start',
+      alignItems:'flex-start',
+      left:'5%'
+    },
+
+    textContMobile:{
+      flex:1,
       alignContent:'center',
       //backgroundColor:'green',
-      justifyContent:'center'
+      justifyContent:'center',
+      left:'0%'
     },
 
     recyclerManage:{
@@ -289,15 +314,6 @@ const styles = StyleSheet.create({
     backgroundColor:'rgba(0,0,0,0.8)',
     justifyContent: 'center',
     alignItems:'center'
-    },
-
-    contModal:{
-      backgroundColor:'white',
-      width:200,
-      height:200,
-      justifyContent: 'center',
-      alignItems:'center',
-      borderRadius:20
     },
 
     button: {
