@@ -1,18 +1,14 @@
 import {View, SafeAreaView, Text, StyleSheet, ActivityIndicator, Image, Dimensions, useWindowDimensions, Button, Modal, TouchableOpacity, Platform} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ButtonDownload from '../components/ButtonDownLoad';
+
 import { useState } from 'react';
-import { container } from 'webpack';
 import ButtonInfo from '../components/ButtonInfo';
 import LinearGradient from 'react-native-web-linear-gradient';
 import ButtonDownloadUX from '../components/ButtonDownLoadUX';
+import { ModalContent } from '../components/ModalContent';
 
 const dimensions = Dimensions.get('window');
 const {height, width}=Dimensions.get('window')
-const imageHeight = Math.round(dimensions.width * 1 / 16); //calculate with aspect ratio
-const imageWidth = dimensions.width *0.2;
-//const appLaunchHeigth = Math.round(dimensions.width * 3 / 16);
-const appLaunchWidth = dimensions.width *0.3;
 
 const isSmallDevice = dimensions.width < 768
 
@@ -24,13 +20,26 @@ export const HomeScreen = ()=>{
 
     const [isVisible, setIsVisible] = useState(false);
 
-    const [modalText, setModalText] = useState('ksksks');
+    const [modalTitle, setModalTitle] = useState('') 
+    const [modalText, setModalText] = useState('');
 
-    const touchInfo = (text: string) =>{
-      setIsVisible(true);
+    const touchInfo = (title: string, text: string) =>{
+      setModalTitle(title);
       setModalText(text);
+      setIsVisible(true);
     }
 
+    
+    const modalTitle1= 'Quienes somos';
+    const modalInfo1 = 'somos nosotros';
+  
+    const modalTitle2 = 'Colabora con Idea 3D';
+    const modalInfo2 = 'un pesito pa la birra';  
+  
+    const modalTitle3= 'Contactanos';
+    const modalInfo3 = 'mandame un poema ksqjswkljsklqjsqs \nsksjksjsjsjsssjsksqnslnqlsmssjsjsjsjsjsjsj\nsssssssssssssssssssssssssssssssssssssssssssssssssssssssssss';
+      
+  
     return (
         
       <SafeAreaView style={styles.safeArea }> 
@@ -44,16 +53,11 @@ export const HomeScreen = ()=>{
                 >
 
             <View style={styles.containerModal}> 
-                
-                <View style = {styles.contModal}>
-                    <Text style = {styles.textModal} >{modalText}</Text>
-                    <TouchableOpacity style ={styles.button}>
-                      <Button 
-                          title= 'cerrar'
-                          onPress={()=> setIsVisible(false)}/>
-                    </TouchableOpacity>
-                </View>
 
+            <ModalContent onPress={()=> setIsVisible(false)}
+                          title = {modalTitle}
+                          info  = {modalText}/>
+  
             </View>
             
         </Modal>
@@ -69,9 +73,9 @@ export const HomeScreen = ()=>{
             </View>
             
             <View style = {styles.containerRight}>
-              <ButtonInfo onPress={()=>touchInfo('nosotroo')} icon={require('../assets/cubo.png')}/>
-              <ButtonInfo onPress={()=>touchInfo('colabora gato')} icon={require('../assets/corazon.png')}/>
-              <ButtonInfo onPress={()=>touchInfo('send me an emaalala')} icon={require('../assets/avion-de-papel.png')}/>
+              <ButtonInfo onPress={()=>touchInfo(modalTitle1, modalInfo1)} icon={require('../assets/cubo.png')}/>
+              <ButtonInfo onPress={()=>touchInfo(modalTitle2, modalInfo2)} icon={require('../assets/corazon.png')}/>
+              <ButtonInfo onPress={()=>touchInfo(modalTitle3, modalInfo3)} icon={require('../assets/avion-de-papel.png')}/>
 
             </View>
 
@@ -313,12 +317,18 @@ const styles = StyleSheet.create({
     },
 
     contModal:{
-      backgroundColor:'white',
-      width:200,
-      height:200,
+      backgroundColor:'rgba(255,255,255,0.7)',
+      width:'40%',
+      height:'70%',
+      padding:10,
       justifyContent: 'center',
       alignItems:'center',
       borderRadius:20
+    },
+
+    contModalMobile:{
+      width:'70%',
+      height:'50%',
     },
 
     button: {
