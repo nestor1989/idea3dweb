@@ -35,7 +35,7 @@ export const ModalContent = ({onPress, title, info}: Props) =>{
 const styles = StyleSheet.create({
     contModal:{
         backgroundColor:'rgba(255,255,255,0.7)',
-        width:'40%',
+        width:'30%',
         padding:10,
         alignItems:'center',
         borderRadius:25
