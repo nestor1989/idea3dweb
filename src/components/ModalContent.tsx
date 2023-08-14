@@ -28,8 +28,8 @@ export const ModalContent = ({onPress, title, info, isVisible}: Props) =>{
             <Text style = {styles.titleModal} >{title}</Text>
             <Text style = {styles.subtitleMobile}>{info}</Text>
             <View style={styles.contDownload}>
-            {isVisible ? <ButtonSponsor url='https://paypal.me/nestordelrio?country.x=AR&locale.x=es_XC'/> : null}  
-              </View>
+              {isVisible ? <ButtonSponsor url='https://paypal.me/nestordelrio?country.x=AR&locale.x=es_XC'/> : null}  
+            </View>
                     
         </View>
 
