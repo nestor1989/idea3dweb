@@ -23,10 +23,12 @@ export const HomeScreen = ()=>{
 
     const [modalTitle, setModalTitle] = useState('') 
     const [modalText, setModalText] = useState('');
+    const [buttonVis, setButtonVis] = useState(false);
 
-    const touchInfo = (title: string, text: string) =>{
+    const touchInfo = (title: string, text: string, buttonVisible: boolean) =>{
       setModalTitle(title);
       setModalText(text);
+      setButtonVis(buttonVisible)
       setIsVisible(true);
     }
   
@@ -46,7 +48,8 @@ export const HomeScreen = ()=>{
 
             <ModalContent onPress={()=> setIsVisible(false)}
                           title = {modalTitle}
-                          info  = {modalText}/>
+                          info  = {modalText}
+                          isVisible = {buttonVis}/>
   
             </View>
             
@@ -63,9 +66,9 @@ export const HomeScreen = ()=>{
             </View>
             
             <View style = {styles.containerRight}>
-              <ButtonInfo onPress={()=>touchInfo(myConstClass.modalTitle1, myConstClass.modalInfo1)} icon={require('../assets/cubo.png')}/>
-              <ButtonInfo onPress={()=>touchInfo(myConstClass.modalTitle2, myConstClass.modalInfo2)} icon={require('../assets/corazon.png')}/>
-              <ButtonInfo onPress={()=>touchInfo(myConstClass.modalTitle3, myConstClass.modalInfo3)} icon={require('../assets/avion-de-papel.png')}/>
+              <ButtonInfo onPress={()=>touchInfo(myConstClass.modalTitle1, myConstClass.modalInfo1, false)} icon={require('../assets/cubo.png')}/>
+              <ButtonInfo onPress={()=>touchInfo(myConstClass.modalTitle2, myConstClass.modalInfo2, true)} icon={require('../assets/corazon.png')}/>
+              <ButtonInfo onPress={()=>touchInfo(myConstClass.modalTitle3, myConstClass.modalInfo3, false)} icon={require('../assets/avion-de-papel.png')}/>
 
             </View>
 

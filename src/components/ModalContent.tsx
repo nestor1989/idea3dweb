@@ -1,5 +1,7 @@
 import { Button, Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import ButtonInfo from "./ButtonInfo";
+import ButtonDownloadUX from "./ButtonDownLoadUX";
+import ButtonSponsor from "./ButtonSponsor";
 
 const dimensions = Dimensions.get('window');
 const isSmallDevice = dimensions.width < 768
@@ -7,9 +9,10 @@ interface Props{
     onPress: () => void;
     title: string;
     info: string;
+    isVisible? : boolean;
 }
 
-export const ModalContent = ({onPress, title, info}: Props) =>{
+export const ModalContent = ({onPress, title, info, isVisible}: Props) =>{
     return(
         <View style = {[styles.contModal, isSmallDevice && styles.contModalMobile]}>
                     
@@ -24,6 +27,9 @@ export const ModalContent = ({onPress, title, info}: Props) =>{
             </TouchableOpacity>
             <Text style = {styles.titleModal} >{title}</Text>
             <Text style = {styles.subtitleMobile}>{info}</Text>
+            <View style={styles.contDownload}>
+            {isVisible ? <ButtonSponsor url='https://paypal.me/nestordelrio?country.x=AR&locale.x=es_XC'/> : null}  
+              </View>
                     
         </View>
 
@@ -79,6 +85,16 @@ const styles = StyleSheet.create({
         textAlign: 'justify',
         margin: 15,
         fontFamily: 'at_surt_light.otf'
+      },
+
+      contDownload:{
+        //flex:1, 
+        width: '100%',
+        justifyContent:'flex-end', 
+        alignItems: 'flex-end', 
+        marginRight: 15,
+        marginBottom: 15
+        //backgroundColor:'blue'
       },
 
       
