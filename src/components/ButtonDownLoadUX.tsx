@@ -20,7 +20,9 @@ const ButtonDownloadUX = ({ url}: MyButtonProps) => {
     <TouchableOpacity 
         style={styles.button} 
         onPress={handleButtonPress}
-        activeOpacity={0.5}>
+        activeOpacity={0.5}
+
+        >
 
           <Text style = {[styles.title, isSmallDevice && styles.titleMobile]}>Descargar la app</Text>
       
