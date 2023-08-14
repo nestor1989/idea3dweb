@@ -1,10 +1,18 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { Navigator } from "./src/navigation/navigator";
-import React from 'react';
+import React, { useEffect } from 'react';
 import {StyleSheet} from 'react-native';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const App = () => {
+  
   return (
+    <HelmetProvider>
+      <Helmet>
+      <title>Nuevo Título de Pestaña</title>
+        <meta name="description" content="Nueva descripción de la página." />
+        <meta property="og:image" content="URL_de_la_miniatura" />
+      </Helmet>
     <NavigationContainer>
       <>
       
@@ -12,25 +20,8 @@ const App = () => {
 
       </>
       </NavigationContainer>
+    </HelmetProvider>
   )
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#C3E8BD',
-    paddingTop: 40,
-    paddingHorizontal: 10,
-  },
-  button: {
-    backgroundColor: '#ADBDFF',
-    padding: 5,
-    marginVertical: 20,
-    alignSelf: 'flex-start',
-  },
-  title: {
-    fontSize: 40,
-  },
-});
 
 export default App;

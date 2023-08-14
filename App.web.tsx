@@ -2,9 +2,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Navigator } from './src/navigation/navigator';
 import React from 'react';
 import {StyleSheet} from 'react-native';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const App = () => {
   return (
+    <HelmetProvider>
+      <Helmet>
+      <title>Idea 3D</title>
+        <meta name="description" content="Impresión 3D en la palma de tu mano" />
+        <meta property="og:image" content={'./assets/idea-logo-circ.png'} />
+      </Helmet>
     <NavigationContainer>
       <>
       
@@ -12,25 +19,8 @@ const App = () => {
 
       </>
       </NavigationContainer>
+    </HelmetProvider>
   )
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#C3E8BD',
-    paddingTop: 40,
-    paddingHorizontal: 10,
-  },
-  button: {
-    backgroundColor: '#ADBDFF',
-    padding: 5,
-    marginVertical: 20,
-    alignSelf: 'flex-start',
-  },
-  title: {
-    fontSize: 40,
-  },
-});
 
 export default App;
